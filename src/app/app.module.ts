@@ -6,17 +6,18 @@ import { AppComponent } from './app.component';
 // import { NavbarComponent } from './navbar/navbar.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { SearchFormComponent } from './shared/components/search-form/search-form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    
     SearchFormComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -6,6 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./character-list.component.scss']
 })
 export class CharacterListComponent implements OnInit {
+  characters: Character[] = []
+  private pagenum= 1;
+  private query =  '';
+  
+
 
   constructor() { }
 
