@@ -1,1 +1,12 @@
-<p>character-list works!</p>
+<div class="justify-content-center align-items-center">
+    <div class="card-columns row justify-content-center align-items-center">
+        <div class="card m-3" *ngFor="let character of characters">
+            <div>
+                <img class="card-img-top" [src]="character.image" alt="">
+            </div>
+            <div class="card-body">
+                <h5>{{character.name}}</h5>
+            </div>
+        </div>
+    </div>
+</div>
