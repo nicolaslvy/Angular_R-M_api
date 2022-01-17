@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener,Inject } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router,NavigationEnd } from '@angular/router';
+
 import { Character } from 'src/app/shared/interfaces/characters.interface';
 import { CharacterService } from 'src/app/shared/services/character.service';
-import {take} from 'rxjs/operators';
+import {filter, take} from 'rxjs/operators';
+
+
 type RequestInfo = {next: string}
 @Component({
   selector: 'app-character-list',
@@ -11,26 +15,50 @@ type RequestInfo = {next: string}
 export class CharacterListComponent implements OnInit {
   characters: Character[] = [];
   info: RequestInfo = {next: '0'}
-  private pagenum= 1;
+  showGoUpButton = false;
+
+  private pageNum = 1;
+
   private query =  '';
+
+  private hideScrollHeight = 200;
+
+  private showScrollHeight = 500;
   
 
 
-  constructor(private characterSvc: CharacterService) { }
+  constructor(private characterSvc: CharacterService, private route: ActivatedRoute,private router: Router) { }
 
   ngOnInit(): void {
-    this.getData()
+    this.getCharacter()
   }
-  private getData(): void{
-    this.characterSvc.searchCharacters(this.query, this.pagenum).pipe(take(1)).subscribe(
-      (res: any)=>{
-        console.table(res);
-        const {info,results} = res;
-        this.characters = [...this.characters,...results];
-        this.info = info;
 
-      })
+  private getCharacter(): void{
+    this.route.queryParams.pipe(take(1) ).subscribe(
+      (params: ParamMap)=>{
+        this.query = params['q'];
+        this.getData();
+      }
+      
+      
+      );
+
   }
+
+  
+    private getData(): void{
+      this.characterSvc.searchCharacters(this.query, this.pageNum).pipe(take(1)).subscribe(
+        (res: any)=>{
+          console.table(res);
+          const {info,results} = res;
+          this.characters = [...this.characters,...results];
+          this.info = info;
+  
+        })
+    }
 
 
 }
+
+
+
