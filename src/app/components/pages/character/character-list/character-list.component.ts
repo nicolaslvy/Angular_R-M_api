@@ -27,10 +27,24 @@ export class CharacterListComponent implements OnInit {
   
 
 
-  constructor(private characterSvc: CharacterService, private route: ActivatedRoute,private router: Router) { }
+  constructor(private characterSvc: CharacterService, private route: ActivatedRoute,private router: Router) { 
+    this.onUrlChanged()
+  }
 
   ngOnInit(): void {
     this.getCharacter()
+  }
+
+  private onUrlChanged(){
+    this.router.events.pipe(
+      filter((event)=>
+        event instanceof NavigationEnd
+      )
+    ).subscribe(()=>{
+      this.characters = [];
+        this.pageNum = 1;
+        this.getCharacter();
+    })
   }
 
   private getCharacter(): void{
