@@ -14,7 +14,8 @@ export class CharacterService {
 
   }
   getDetails(id: number) {
-    return this.http.get<Character[]>(`${environment.baseUrlAPI}/${id}`)
+    const filter = `${environment.baseUrlAPI}/${id}`;
+    return this.http.get<Character>(filter);
    }
     
 }

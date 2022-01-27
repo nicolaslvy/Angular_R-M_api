@@ -5,16 +5,16 @@
                 <img class="card-img-top" [src]="character.image" alt="">
             </div>
             <div class="card-body w-100 p-0" >
-                <h5 class="card-title m-0">{{character.name | slice: 0:10}}</h5>
+                <a [routerLink]="['/character-details', character.id]"><h5 class="card-title m-0">{{character.name | slice: 0:13}}</h5></a>
                 <ul class="list-group flush bg-dark m-0" >
                     <li class="list-group-item p-0 ">status: {{character.status}}</li>
                     <li class="list-group-item p-0 ">gender: {{character.gender}}</li>
                     <li class="list-group-item p-0 ">species: {{character.species}}</li>
                 </ul>
-                <button btn btn-primary>show details</button>
+                <button class="btn btn-primary" [routerLink]="['/character-details', character]">show details</button>
             </div>
         </div>
     </div>
     <div *ngIf="characters.length <= 0">No results</div>
-    <button class="btn btn-dark">Go up </button>
+    <button class="btn btn-primary">Go up </button>
 </div>
