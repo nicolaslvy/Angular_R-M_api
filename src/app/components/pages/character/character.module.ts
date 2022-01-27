@@ -4,8 +4,8 @@ import { RouterModule } from '@angular/router';
 
 import { CharacterDetailsComponent } from './character-details/character-details.component';
 import { CharacterListComponent } from './character-list/character-list.component';
-
-const myComponents =  [CharacterDetailsComponent,CharacterListComponent]
+import { CharacterComponent } from './character.component';
+const myComponents =  [CharacterDetailsComponent,CharacterListComponent,CharacterComponent]
 
 @NgModule({
   declarations: [...myComponents],
